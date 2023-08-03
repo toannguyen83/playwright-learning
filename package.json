@@ -1,0 +1,21 @@
+{
+  "name": "playwright-learning",
+  "version": "1.0.0",
+  "description": "Provide playwright automation learning and examples",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toannguyen83/playwright-learning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toannguyen83/playwright-learning/issues"
+  },
+  "homepage": "https://github.com/toannguyen83/playwright-learning#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.36.2"
+  }
+}
