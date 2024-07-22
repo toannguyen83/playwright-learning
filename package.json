@@ -16,6 +16,6 @@
   },
   "homepage": "https://github.com/toannguyen83/playwright-learning#readme",
   "devDependencies": {
-    "@playwright/test": "^1.36.2"
+    "@playwright/test": "^1.45.2"
   }
 }
