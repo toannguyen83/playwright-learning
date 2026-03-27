@@ -1,19 +1,23 @@
-# Playwright vs Postman
+# Playwright vs Postman (API Testing)
 
-I use both Playwright and Postman for API testing and I'd like to share my experiences on pros and cons between the tools.
+I utilize both Playwright and Postman for API automation. While Postman is a fantastic tool for exploratory testing and manual debugging, it presents significant scaling challenges in a professional CI/CD environment compared to a code-first framework like Playwright.
 
-| Function                  | Playwright                                    | Postman                                                                                                                      | Comments |
-| ------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- |
-| Writing Tests             | Full code base                                | UI + Pre/Post scripting                                                                                                      |          |
-| Learning Curve            | Moderate                                      | Easy                                                                                                                         |          |
-| Source Control            | Friendly                                      | - Friendly with Postman Workspace (might be paid) <br> - Nightmare with import / export json files (imagine merge conflicts) |
-| Code review               | Friendly                                      | - Friendly with Postman Fork <br> - Nightmare with import / export json files                                                |          |
-| Code re-use               | Friendly (fixtures, code shared libs, etc...) | Mostly require copy / paste                                                                                                  |
-| Running Tests Performance | Parallel / Sharding                           | No Parallel, though you can setup CI/CD to run multiple collections in parallel                                              |
-| Load Test                 | Not Intended                                  | Yes, in Runner > Performance Tab                                                                                             |          |
+| Function | Playwright | Postman | Comments |
+| :--- | :--- | :--- | :--- |
+| **Writing Tests** | **Full TypeScript/JS** | UI + Pre/Post Scripting | Playwright allows for modern JS features, while Postman scripts run in a proprietary sandbox. |
+| **Source Control** | **Git Friendly** | JSON Export/Import | Merging a Postman JSON file is a "merge conflict nightmare." Playwright code is clean and human-readable. |
+| **Code Review** | **Highly Efficient** | Low Visibility | Reviewing 500 lines of exported Postman JSON is nearly impossible compared to a 20-line Playwright test. |
+| **Code Re-use** | **Native** (Libs/Fixtures) | Limited (Global Scripts) | Playwright allows for true shared libraries and utility functions across the entire suite. |
+| **Performance** | **Native Sharding** | Sequential Execution | Playwright runs API tests in parallel by default. Postman’s Newman runner is primarily sequential. |
+| **Type Safety** | **Strongly Typed** | None (String-based) | Playwright allows you to share TypeScript interfaces with developers for 100% contract accuracy. |
+| **Load Testing** | Not Intended | **Performance Tab** | Postman has built-in basic load testing; Playwright requires external tools (like k6). |
 
 ## Ending Notes
 
-In the end, our automation team wrote all API tests in Playwright for ease of code review, refactor, less nightmare of merge conflicts.
+### Why we moved our Core API Suite to Playwright:
+1. **The "Merge Conflict" Problem:** Storing Postman JSON files in Git led to constant "headaches" during team collaboration. Playwright tests are just files, making branching and merging seamless.
+2. **Unified Toolbox:** Using Playwright for both E2E and API allows our team to share authentication logic, environment variables, and reporting in a single repo.
+3. **TypeScript Integration:** By using TypeScript, we catch breaking API changes (like a renamed field) during the build phase rather than at runtime.
 
-We still have Postman API tests and being maintainted by devs. We're doing the import / export collections approach to store json files in source control. This method gives us headache when code review and nasty merge conflicts.
+### The Role of Postman:
+We still value Postman for **Exploratory Testing** and quick manual debugging. It is an excellent "playground" for developers to test a single endpoint, but for a scalable, automated safety net, we find the code-first approach of Playwright more sustainable.
