@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    
+    /* Optimization & Environment */
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "@playwright/test"]
+  },
+  "include": ["tests/**/*", "playwright.config.ts"]
+}

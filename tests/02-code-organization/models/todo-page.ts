@@ -1,10 +1,12 @@
-import { Page, expect } from '@playwright/test'
+import { Locator, Page, expect } from '@playwright/test'
 import { TodoItem } from './todo-item'
 
 export class TodoPage {
-  private readonly todoItems = this.page.getByTestId('todo-item')
+  private readonly todoItems: Locator
 
-  constructor(private readonly page: Page, private readonly url: string) {}
+  constructor(private readonly page: Page, private readonly url: string) {
+    this.todoItems = this.page.getByTestId('todo-item')
+  }
 
   async goto() {
     await this.page.goto(this.url)

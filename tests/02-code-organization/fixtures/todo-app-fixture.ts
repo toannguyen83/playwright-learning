@@ -3,6 +3,10 @@ import { TodoPage } from '../models/todo-page'
 
 // either interface or type should work for fixture implementation
 interface TodoAppFixture {
+  // playwright default baseURL is a type of string | undefined, if we're going strict and have
+  // strictNullChecks on, it can throw a type error when passing in to TodoPage constructor
+  // this can help override the default string | undefined type with a string type (guarantee to have value)
+  baseURL: string
   todoPage: TodoPage
   initTodoAppFixture: void
 }
@@ -21,7 +25,7 @@ export const test = base.extend<TodoAppFixture>({
 
       await use()
 
-      // if app needs to clean up after test, code can be here
+      // code after await use() ran after test finishes, can be used for cleanup / teardown
     },
     { auto: true }
   ]

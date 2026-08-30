@@ -17,6 +17,7 @@ export const test = base.extend<CreatedTodosFixture>({
       for (const todo of todoData) {
         await todoPage.addTodo(todo)
       }
+      
       await use()
     },
     { auto: true }
